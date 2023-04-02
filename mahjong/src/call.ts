@@ -1,3 +1,5 @@
+import Tile from './tile';
+
 function chii(hand: Tile[], discard : Tile): [Tile[]] {
   return [[]];
 }

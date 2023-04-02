@@ -8,12 +8,8 @@ export default class Game {
 
   constructor() {
     let tiles = Init();
-    console.log(tiles.length);
     this.wall = tiles.slice(0,-14);
     this.deadWall = tiles.slice(-14);
-  }
-
-  shuffle() {
   }
 }
 
@@ -21,12 +17,12 @@ function Init(): Tile[] {
   let tiles : Tile[] = [];
   // add numbered tiles
   for(let i = 1; i <= 9; i++) {
-    let t : Tile = {suit: Suit.Manzu, value: i};
-    PushFour(tiles, t);
-    t.suit = Suit.Souzu;
-    PushFour(tiles, t);
-    t.suit = Suit.Pinzu;
-    PushFour(tiles, t);
+    let t1 : Tile = {suit: Suit.Manzu, value: i};
+    let t2 : Tile = {suit: Suit.Souzu, value: i};
+    let t3 : Tile = {suit: Suit.Pinzu, value: i};
+    PushFour(tiles, t1);
+    PushFour(tiles, t2);
+    PushFour(tiles, t3);
   }
   //winds 
   PushFour(tiles, {suit: Suit.Kazehai, value: Honor.Ton});
@@ -38,7 +34,7 @@ function Init(): Tile[] {
   PushFour(tiles, {suit: Suit.Sangenpai, value: Honor.Hatsu});
   PushFour(tiles, {suit: Suit.Sangenpai, value: Honor.Chun});
 
-  // shuffle with Durstenfeld Algo
+  // shuffle
   for (let i = 0 ; i < tiles.length - 1; i++) {
     let j = Math.floor(Math.random() * (i + 1));
     let temp = tiles[i];
