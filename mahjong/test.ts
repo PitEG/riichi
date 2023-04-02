@@ -1,2 +1,5 @@
+import Game from './src/game';
 let thing = 'hi'
-console.log(thing)
+let game = new Game();
+console.log(game.wall)
+console.log(game.deadWall)
