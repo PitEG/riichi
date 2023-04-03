@@ -7,8 +7,12 @@ export class Tile {
     this.value = value;
   }
 
-  public clone() : Tile{
+  clone() : Tile {
     return new Tile(this.suit, this.value);
+  }
+
+  equals(tile: Tile) : boolean {
+    return (this.suit == tile.suit && this.value == tile.value);
   }
 
   // is an honor tile

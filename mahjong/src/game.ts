@@ -1,15 +1,32 @@
 import Player from './player';
+import Event from './event';
+import Command from './command';
+import Response from './response';
 import {Tile,Suit,Honor} from './tile';
 
 export default class Game {
-  // players: Player[]; // should only be 4
+  players: Player[]; // should only be 4 players, never more or less
+  round: Honor; // typically East or South
+  dealer: number; // whichever player is dealer this round
+  turn: number; // current player's turn
   wall: Tile[];
   deadWall: Tile[];
+  dora: number; // total number of dora, just take from end of deadwall
 
   constructor() {
     let tiles = Init();
     this.wall = tiles.slice(0,-14);
     this.deadWall = tiles.slice(-14);
+    this.dora = 1;
+    this.dealer = 0;
+    this.round = Honor.Chun; // east wind
+    this.turn = 0;
+    this.players = [];
+  }
+
+  // commands 
+  play(command : Command) : Response {
+    return new Response();
   }
 }
 

@@ -8,5 +8,4 @@ console.log(game.deadWall)
 
 console.log((new Tile(Suit.Pinzu, 8)).nameEN());
 console.log((new Tile(Suit.Souzu, 9)).dora().nameEN());
-console.log((new Tile(Suit.Kazehai, Honor.Ton)).dora());
 console.log((new Tile(Suit.Kazehai, Honor.Ton)).dora().nameEN());
