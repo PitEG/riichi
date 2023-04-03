@@ -1,8 +1,8 @@
 export class Tile {
   suit: Suit; // Shoku
-  value: number | Honor | null;
+  value: number | Honor;
 
-  constructor(suit: Suit, value: number | Honor | null) {
+  constructor(suit: Suit, value: number | Honor) {
     this.suit = suit;
     this.value = value;
   }
@@ -37,13 +37,37 @@ export class Tile {
   isYaochuuhai() : boolean {
     return this.isJihai() || this.isRoutouhai();
   }
+
+  dora() : Tile {
+    if (this.isJihai()) {
+      switch(this.value) {
+        // winds
+        case(Honor.Ton): return new Tile(Suit.Kazehai, Honor.Nan);
+        case(Honor.Nan): return new Tile(Suit.Kazehai, Honor.Shaa);
+        case(Honor.Shaa): return new Tile(Suit.Kazehai, Honor.Pei);
+        case(Honor.Pei): return new Tile(Suit.Kazehai, Honor.Ton);
+        // dragons
+        case(Honor.Haku): return new Tile(Suit.Kazehai, Honor.Hatsu);
+        case(Honor.Hatsu): return new Tile(Suit.Kazehai, Honor.Chun);
+        case(Honor.Chun): return new Tile(Suit.Kazehai, Honor.Haku);
+      }
+    }
+    else if (!this.isJihai()) {
+      if (this.value < 9) {
+        return new Tile(this.suit, this.value + 1);
+      }
+      else {
+        return new Tile(this.suit, 1);
+      }
+    }
+    return new Tile(0,0);
+  }
   
   isRealTile() : boolean {
     // if a numbered this, check if number is valid
     if ((this.suit == Suit.Manzu || this.suit == Suit.Souzu || this.suit == Suit.Pinzu) && (typeof this.value == "number")) {
       return this.value >= 1 && this.value <= 9;
     }
-    
     // if honor this, make sure suit matches value
     if (this.suit == Suit.Kazehai && 
         (this.value == Honor.Ton || 
@@ -58,7 +82,6 @@ export class Tile {
          this.value == Honor.Chun)) {
       return true;
     }
-  
     // otherwise it's not a valid tile
     return false;
   }
