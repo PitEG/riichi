@@ -95,22 +95,15 @@ export class Tile {
       }
     }
     else if (this.isJihai()) {
-      let name : string = "";
       switch(this.value) {
-        case(Honor.Ton):    name = 'East';
-        case(Honor.Nan):    name = 'South';
-        case(Honor.Shaa):   name = 'West';
-        case(Honor.Pei):    name = 'North';
-        case(Honor.Haku):   name = 'White';
-        case(Honor.Hatsu):  name = 'Green';
-        case(Honor.Chun):   name = 'Red';
-        default: name = "Invalid";
+        case(Honor.Ton):   return 'East Wind';
+        case(Honor.Nan):   return 'South Wind';
+        case(Honor.Shaa):  return 'West Wind';
+        case(Honor.Pei):   return 'North Wind';
+        case(Honor.Haku):  return 'White Dragon';
+        case(Honor.Hatsu): return 'Green Dragon';
+        case(Honor.Chun):  return 'Red Dragon';
       };
-      switch(this.suit) {
-        case(Suit.Sangenpai): name.concat(' Dragon');
-        case(Suit.Kazehai): name.concat(' Wind');
-      };
-      return name;
     }
 
     // else just say it's an uknown tile
