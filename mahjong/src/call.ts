@@ -4,7 +4,7 @@ function chii(hand: Tile[], discard : Tile): [Tile[]] {
   return [[]];
 }
 
-function kan(concealed: Tile[], revealed: [Tile[]]) : Tile[] {
+function kan(concealed: Tile[], revealed: [Tile[]], discard : Tile) : Tile[] {
   return [];
 }
 

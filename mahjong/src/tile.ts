@@ -7,8 +7,8 @@ export class Tile {
     this.value = value;
   }
 
-  public toString = () : string => {
-    return `${typeof this.suit} - ${this.value}`;
+  public clone() : Tile{
+    return new Tile(this.suit, this.value);
   }
 
   // is an honor tile
@@ -91,7 +91,7 @@ export class Tile {
       switch(this.suit) {
         case(Suit.Manzu): return `${this.value} Character`;
         case(Suit.Souzu): return `${this.value} Bamboo`;
-        case(Suit.Manzu): return `${this.value} Circle`;
+        case(Suit.Pinzu): return `${this.value} Circle`;
       }
     }
     else if (this.isJihai()) {

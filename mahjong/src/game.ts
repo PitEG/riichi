@@ -17,22 +17,22 @@ function Init(): Tile[] {
   let tiles : Tile[] = [];
   // add numbered tiles
   for(let i = 1; i <= 9; i++) {
-    let t1 : Tile = {suit: Suit.Manzu, value: i};
-    let t2 : Tile = {suit: Suit.Souzu, value: i};
-    let t3 : Tile = {suit: Suit.Pinzu, value: i};
+    let t1 : Tile = new Tile(Suit.Manzu, i);
+    let t2 : Tile = new Tile(Suit.Souzu, i);
+    let t3 : Tile = new Tile(Suit.Pinzu, i);
     PushFour(tiles, t1);
     PushFour(tiles, t2);
     PushFour(tiles, t3);
   }
   //winds 
-  PushFour(tiles, {suit: Suit.Kazehai, value: Honor.Ton});
-  PushFour(tiles, {suit: Suit.Kazehai, value: Honor.Nan});
-  PushFour(tiles, {suit: Suit.Kazehai, value: Honor.Shaa});
-  PushFour(tiles, {suit: Suit.Kazehai, value: Honor.Pei});
+  PushFour(tiles, new Tile(Suit.Kazehai,Honor.Ton));
+  PushFour(tiles, new Tile(Suit.Kazehai, Honor.Nan));
+  PushFour(tiles, new Tile(Suit.Kazehai, Honor.Shaa));
+  PushFour(tiles, new Tile(Suit.Kazehai, Honor.Pei));
   // dragon
-  PushFour(tiles, {suit: Suit.Sangenpai, value: Honor.Haku});
-  PushFour(tiles, {suit: Suit.Sangenpai, value: Honor.Hatsu});
-  PushFour(tiles, {suit: Suit.Sangenpai, value: Honor.Chun});
+  PushFour(tiles, new Tile(Suit.Sangenpai, Honor.Haku));
+  PushFour(tiles, new Tile(Suit.Sangenpai, Honor.Hatsu));
+  PushFour(tiles, new Tile(Suit.Sangenpai, Honor.Chun));
 
   // shuffle
   for (let i = 0 ; i < tiles.length - 1; i++) {
@@ -45,8 +45,8 @@ function Init(): Tile[] {
 }
 
 function PushFour(tiles: Tile[], tile: Tile) {
-  tiles.push(tile);
-  tiles.push(tile);
-  tiles.push(tile);
-  tiles.push(tile);
+  tiles.push(tile.clone());
+  tiles.push(tile.clone());
+  tiles.push(tile.clone());
+  tiles.push(tile.clone());
 }
