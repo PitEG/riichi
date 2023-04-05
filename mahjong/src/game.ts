@@ -12,6 +12,9 @@ export default class Game {
   wall: Tile[];
   deadWall: Tile[];
   dora: number; // total number of dora, just take from end of deadwall
+  // game state is recorded through events
+  playLog: Command[];
+  currentPlay: number;
 
   constructor() {
     let tiles = Init();
@@ -21,13 +24,21 @@ export default class Game {
     this.dealer = 0;
     this.round = Honor.Chun; // east wind
     this.turn = 0;
-    this.players = [];
+    this.players = [ new Player(), new Player(), new Player(), new Player(), ];
+    this.playLog = [];
+    this.currentPlay = 0;
   }
 
-  // commands 
+  // do command
   play(command : Command) : Response {
+    command.do(this);
     return new Response();
   }
+
+  // undo last command
+  undo() : Response {
+    return new Response();
+  };
 }
 
 function Init(): Tile[] {

@@ -6,6 +6,16 @@ export class Tile {
     this.suit = suit;
     this.value = value;
   }
+  
+  // special tile used for covered tiles, should probably be only used for display
+  // not considered a "real tile" by the isRealTile() method.
+  static Unknown() : Tile {
+    return new Tile(0,0);
+  }
+
+  isUnknown() : boolean {
+    return this.suit == 0 && this.value == 0;
+  }
 
   clone() : Tile {
     return new Tile(this.suit, this.value);
@@ -42,6 +52,7 @@ export class Tile {
     return this.isJihai() || this.isRoutouhai();
   }
 
+  // finds the "dora" of this tile ie: the succeeding tile
   dora() : Tile {
     if (this.isJihai()) {
       switch(this.value) {

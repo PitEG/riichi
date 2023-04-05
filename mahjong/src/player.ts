@@ -5,7 +5,15 @@ export default class Player {
   score: number;
   discards: Tile[];
   concealed: Tile[];
-  revealed: [Tile[]];
+  revealed: Tile[][];
+
+  constructor() {
+    this.seat = 0;
+    this.score = 0;
+    this.discards = [];
+    this.concealed = [];
+    this.revealed = [];
+  }
 
   draw(tile: Tile) {
     // pushes it to the end of the concealed list, doesn't rearrange layout
