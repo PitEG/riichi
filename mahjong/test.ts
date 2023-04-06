@@ -16,3 +16,6 @@ game.play(c);
 console.log(c.name);
 console.log(game.players[0].concealed);
 console.log(game.deadWall)
+console.log(Tile.compare(new Tile(0,1),new Tile(1,1)));
+console.log(Tile.compare(new Tile(0,1),new Tile(0,2)));
+console.log(Tile.compare(new Tile(2,1),new Tile(0,2)));

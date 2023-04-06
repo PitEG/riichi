@@ -9,8 +9,16 @@ export class Tile {
   
   // special tile used for covered tiles, should probably be only used for display
   // not considered a "real tile" by the isRealTile() method.
-  static Unknown() : Tile {
+  static unknown() : Tile {
     return new Tile(0,0);
+  }
+
+  // returns negative number if a < b, 0 if a == b, and positive number if a > b
+  static compare(a : Tile , b : Tile) : number {
+    if (a.suit - b.suit !== 0) {
+      return a.suit - b.suit;
+    }
+    return a.value - b.value;
   }
 
   isUnknown() : boolean {
