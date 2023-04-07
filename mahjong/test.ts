@@ -19,3 +19,9 @@ console.log(game.deadWall)
 console.log(Tile.compare(new Tile(0,1),new Tile(1,1)));
 console.log(Tile.compare(new Tile(0,1),new Tile(0,2)));
 console.log(Tile.compare(new Tile(2,1),new Tile(0,2)));
+
+console.log(Tile.isShuntsu(new Tile(0,1), new Tile(0,3), new Tile(0,2)));
+console.log(Tile.isShuntsu(new Tile(0,1), new Tile(0,4), new Tile(0,2)));
+console.log(Tile.isKoutsu(new Tile(1,1), new Tile(1,1), new Tile(1,1)));
+console.log(Tile.isKoutsu(new Tile(0,1), new Tile(1,1), new Tile(1,1)));
+console.log(Tile.isKoutsu(new Tile(1,1), new Tile(1,2), new Tile(1,1)));

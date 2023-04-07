@@ -32,7 +32,27 @@ export default class Player {
   }
 
   // this is gonna be a bit time consuming to implement and test
-  inTenpai() {
+  checkTenpai() : Tile[] {
+    // remove a pair
+    // remove mentsu
+    // remove taatsu
+    // repeat for all possible combinations
+
+    // pairs
+    for (let p1 = 0; p1 < this.concealed.length; p1++) {
+    for (let p2 = p1; p2 < this.concealed.length; p2++) {
+      if (p2 == p1) { continue; } // skip pairing with self
+      // make copy of hand
+      let hand = [...this.concealed];
+      // remove pair
+      hand.splice(p1);
+      hand.splice(p2);
+      // mentsu
+       
+    }
+    }
+
+    return [];
   }
 
   canTsumo() : boolean {

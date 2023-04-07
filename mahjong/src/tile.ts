@@ -21,6 +21,26 @@ export class Tile {
     return a.value - b.value;
   }
 
+  // sequence
+  static isShuntsu(a : Tile, b : Tile, c : Tile) : boolean {
+    // if not same suit, false
+    if (!(a.suit == b.suit && b.suit == c.suit)) {
+      return false;
+    }
+    // order and check if `a + 1 = b and a + 2 = c`;
+    let sorted = [a,b,c].sort(getSortFunc());
+    return (sorted[0].value + 1 == sorted[1].value && a.value + 2 == sorted[2].value);
+  }
+
+  // is triplet
+  static isKoutsu(a : Tile, b : Tile, c : Tile) : boolean {
+    // if not same suit, false
+    if (!(a.suit == b.suit && b.suit == c.suit)) {
+      return false;
+    }
+    return (a.value == b.value && b.value == c.value);
+  }
+
   isUnknown() : boolean {
     return this.suit == 0 && this.value == 0;
   }
@@ -139,6 +159,15 @@ export class Tile {
 
   nameJPRM() : string {
     return "";
+  }
+}
+
+function getSortFunc() {
+  return function(a : Tile, b: Tile) {
+    if (a.suit > b.suit) {
+      return a.suit - b.suit;
+    }
+    return a.value - b.value;
   }
 }
 
