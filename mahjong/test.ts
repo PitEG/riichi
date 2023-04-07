@@ -1,5 +1,6 @@
 import Game from './src/game';
 import Command from './src/command';
+import Player from './src/player';
 import {Tile, Suit, Honor} from './src/tile';
 
 let thing = 'hi'
@@ -25,3 +26,10 @@ console.log(Tile.isShuntsu(new Tile(0,1), new Tile(0,4), new Tile(0,2)));
 console.log(Tile.isKoutsu(new Tile(1,1), new Tile(1,1), new Tile(1,1)));
 console.log(Tile.isKoutsu(new Tile(0,1), new Tile(1,1), new Tile(1,1)));
 console.log(Tile.isKoutsu(new Tile(1,1), new Tile(1,2), new Tile(1,1)));
+
+let p = new Player();
+// 1,2,2,2,3,4,5
+p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new Tile(1,3), new Tile(1,4), new Tile(1,5)];
+// p.concealed = [new Tile(1,1), new Tile(1,1), new Tile(1,2), new Tile(1,2)];
+console.log('finding tenpai');
+console.log(p.checkTenpai());

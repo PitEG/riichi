@@ -21,6 +21,10 @@ export class Tile {
     return a.value - b.value;
   }
 
+  equals(tile: Tile) : boolean {
+    return (this.suit == tile.suit && this.value == tile.value);
+  }
+
   // sequence
   static isShuntsu(a : Tile, b : Tile, c : Tile) : boolean {
     // if not same suit, false
@@ -41,16 +45,43 @@ export class Tile {
     return (a.value == b.value && b.value == c.value);
   }
 
+  // returns list of tiles needed for a mentsu (meld)
+  static checkTaatsu(a : Tile, b : Tile) : Tile[] {
+    // case these tiles are not the same suit
+    if (a.suit != b.suit) { return []; }
+
+    // case this is a sequence
+    let neededTiles : Tile[] = [];
+    if (a.value + 1 == b.value) {
+      neededTiles =  [new Tile(a.suit,a.value-1), new Tile(b.suit,b.value+1)];
+    }
+    if (a.value - 1 == b.value) {
+      neededTiles =  [new Tile(b.suit,b.value-1), new Tile(a.suit,a.value+1)];
+    }
+    if (neededTiles.length > 0) {
+      for (let i = 0; i < neededTiles.length; i++) {
+        if (neededTiles[i].value == 0 || neededTiles[i].value == 10) {
+          neededTiles.splice(i,1);
+        }
+      }
+      return neededTiles;
+    }
+
+    // case this is a triplet
+    if (a.value == b.value) {
+      return [new Tile(a.suit, a.value)];
+    }
+
+    // otherwise return nothing
+    return [];
+  }
+
   isUnknown() : boolean {
     return this.suit == 0 && this.value == 0;
   }
 
   clone() : Tile {
     return new Tile(this.suit, this.value);
-  }
-
-  equals(tile: Tile) : boolean {
-    return (this.suit == tile.suit && this.value == tile.value);
   }
 
   // is an honor tile
