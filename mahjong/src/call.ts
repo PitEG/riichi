@@ -3,9 +3,12 @@ import Tile from './tile';
 export default class Call {
   tile: Tile;
   type: Naki;
-  direction: number;
+  direction: number; // the player that this was taken from
 
-  constructor() {
+  constructor(tile : Tile, type : Naki, direction : number) {
+    this.tile = tile;
+    this.type = type;
+    this.direction = direction;
   }
 
 }

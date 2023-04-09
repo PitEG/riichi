@@ -5,8 +5,8 @@ import {Tile, Suit, Honor} from './src/tile';
 
 let thing = 'hi'
 let game = new Game();
+game.shuffle();
 console.log(game.wall)
-console.log(game.deadWall)
 
 console.log((new Tile(Suit.Pinzu, 8)).nameEN());
 console.log((new Tile(Suit.Souzu, 9)).dora().nameEN());
@@ -16,7 +16,6 @@ let c = Command.playerDraw(1);
 game.play(c);
 console.log(c.name);
 console.log(game.players[0].concealed);
-console.log(game.deadWall)
 console.log(Tile.compare(new Tile(0,1),new Tile(1,1)));
 console.log(Tile.compare(new Tile(0,1),new Tile(0,2)));
 console.log(Tile.compare(new Tile(2,1),new Tile(0,2)));

@@ -17,13 +17,20 @@ export default class Command {
     return new Command(
       `p${player} draw`,
       (game : Game) => {
-        console.log(game.deadWall);
-        game.players[0].concealed.push(game.deadWall[0]);
-        game.deadWall.pop();
+        game.nextTile = game.nextTile + 1;
+        game.players[0].concealed.push(game.wall[0]);
+        game.wall.pop();
       },
       (game: Game) => {
+        game.nextTile = game.nextTile - 1;
       }
     );
   }
+}
+
+function parseCommand(command : string) : Command {
+  command = JSON.parse(command);
+
+  return Command.playerDraw(0);
 }
 

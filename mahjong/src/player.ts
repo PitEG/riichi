@@ -1,16 +1,19 @@
 import {Tile,Honor} from './tile';
+import Call from './call';
 
 export default class Player {
   seat: Honor;
   score: number;
   discards: Tile[];
+  drawnTile: Tile | null;
   concealed: Tile[];
-  revealed: Tile[][];
+  revealed: Call[];
 
   constructor() {
     this.seat = 0;
     this.score = 0;
     this.discards = [];
+    this.drawnTile = null;
     this.concealed = [];
     this.revealed = [];
   }
