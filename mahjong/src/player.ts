@@ -1,5 +1,6 @@
 import {Tile,Honor} from './tile';
 import Call from './call';
+import {Naki} from './call';
 
 export default class Player {
   seat: Honor;
@@ -101,6 +102,37 @@ export default class Player {
     // should only check if preceding player disacrds this tile
     return false;
   }
+
+  fu() : number {
+    let fu = 20;
+    // go through open melds
+    for (let i = 0; i < this.revealed.length; i++) {
+      let meld = this.revealed[i];
+      if (meld.type == Naki.Pon) {
+        if (meld.tile.isJihai()) {
+          fu += 8;
+        }
+        else {
+          fu += 4;
+        }
+      }
+      else if (meld.type == Naki.Minkan) {
+        if (meld.tile.isJihai()) {
+          fu += 16;
+        }
+        else {
+          fu += 8;
+        }
+      }
+    }
+    // go through concealed melds
+    
+    return fu;
+  }
+
+  melds() : Tile[][] {
+    return findMelds(this.concealed);
+  }
 }
 
 // finds tenpai (if it exists) by removing melds
@@ -136,3 +168,43 @@ function findTenpaiAgariRmMelds(tiles : Tile[]) : Tile[] {
   return agari;
 }
 
+// finds melds of a concealed hand (has a pair)
+function findMelds(tiles : Tile[]) : Tile[][] {
+  let hands : Tile[][] = [];
+  // get pair
+  for (let p1 = 0; p1 < tiles.length; p1++) {
+  for (let p2 = 0; p2 < tiles.length; p2++) {
+    // if not equal, let's go again
+    if (!tiles[p1].equals(tiles[p2])) {
+    }
+    // if equal, start finding melds
+    let subset = [...tiles];
+    subset.splice(p1,1);
+    subset.splice(p2-1,1);
+  }
+  }
+  return hands;
+}
+
+// find melds within triplets (no pair)
+function findMeldsNoPair(tiles : Tile[], hands : Tile[][]) : Tile[] {
+  let meld = [];
+  for (let m1 = 0; m1 < tiles.length-2; m1++) {
+  for (let m2 = m1+1; m2 < tiles.length-1; m2++) {
+  for (let m3 = m2+1; m3 < tiles.length; m3++) {
+    // if a valid meld, remove and recurse
+    if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3]) || Tile.isShuntsu(tiles[m1],tiles[m2],tiles[m3])) {
+      let subset = [...tiles];
+      subset.splice(m1,1);
+      subset.splice(m2-1,1);
+      subset.splice(m3-2,1);
+      let hand = findMeldsNoPair(subset, hands);
+      if (hand.length > 0) {
+        hands.push(hand);
+      }
+    }
+  }
+  }
+  }
+  return [];
+}

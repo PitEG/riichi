@@ -32,3 +32,6 @@ p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new T
 // p.concealed = [new Tile(1,1), new Tile(1,1), new Tile(1,2), new Tile(1,2)];
 console.log('finding tenpai');
 console.log(p.checkTenpai());
+
+p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new Tile(1,3), new Tile(1,3), new Tile(1,4), new Tile(1,5)];
+console.log(p.melds());
