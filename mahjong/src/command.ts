@@ -1,13 +1,13 @@
-import Game from './game';
+import Board from './board';
 
 export default class Command {
   name: string;
-  do: (game : Game) => void;
-  undo: (game : Game) => void;
+  do: (Board : Board) => void;
+  undo: (Board : Board) => void;
 
   constructor(name: string,
-              a: (game : Game) => void, 
-              b: (game : Game) => void) {
+              a: (Board : Board) => void, 
+              b: (Board : Board) => void) {
     this.name = name; 
     this.do = a;
     this.undo = b;
@@ -16,13 +16,13 @@ export default class Command {
   static playerDraw(player : number) : Command {
     return new Command(
       `p${player} draw`,
-      (game : Game) => {
-        game.nextTile = game.nextTile + 1;
-        game.players[0].concealed.push(game.wall[0]);
-        game.wall.pop();
+      (Board : Board) => {
+        Board.nextTile = Board.nextTile + 1;
+        Board.players[0].concealed.push(Board.wall[0]);
+        Board.wall.pop();
       },
-      (game: Game) => {
-        game.nextTile = game.nextTile - 1;
+      (Board: Board) => {
+        Board.nextTile = Board.nextTile - 1;
       }
     );
   }

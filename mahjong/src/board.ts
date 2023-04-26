@@ -4,7 +4,7 @@ import Command from './command';
 import Response from './response';
 import {Tile,Suit,Honor} from './tile';
 
-export default class Game {
+export default class Board {
   players: Player[]; // should only be 4 players, never more or less
   round: Honor; // typically East or South
   dealer: number; // whichever player is dealer this round
