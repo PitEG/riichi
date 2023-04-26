@@ -1,6 +1,6 @@
 import Tile from './tile';
 
-export default class Call {
+export default class Meld {
   tile: Tile;
   type: Naki;
   direction: number; // the player that this was taken from
@@ -20,6 +20,8 @@ export enum Naki {
          // discarding a piece from it and it reveals a new dora.
   Minkan,
   Shouminkan,
+
+  Kita, // for 3 player, only comprises of a single north tile
 }
 
 function chii(hand: Tile[], discard : Tile): [Tile[]] {

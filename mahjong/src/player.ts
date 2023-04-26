@@ -1,6 +1,6 @@
 import {Tile,Honor} from './tile';
-import Call from './call';
-import {Naki} from './call';
+import Meld from './meld';
+import {Naki} from './meld';
 
 export default class Player {
   seat: Honor;
@@ -8,7 +8,7 @@ export default class Player {
   discards: Tile[];
   drawnTile: Tile | null;
   concealed: Tile[];
-  revealed: Call[];
+  revealed: Meld[];
 
   constructor() {
     this.seat = 0;
