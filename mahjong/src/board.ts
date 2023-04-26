@@ -40,6 +40,11 @@ export default class Board {
     }
   }
 
+  // turns all tiles into unknown
+  allUnknown() {
+    this.wall = this.wall.map((t) => {return new Tile(0,0); });
+  }
+
   // do command
   play(command : Command) : Response {
     command.do(this);
@@ -50,6 +55,13 @@ export default class Board {
   undo() : Response {
     return new Response();
   };
+
+  setTile(position: number, tile : Tile) {
+    if (this.wall.length < position) {
+      return;
+    }
+    this.wall[position] = tile;
+  }
 }
 
 function init(): Tile[] {
