@@ -130,7 +130,7 @@ export default class Player {
     return fu;
   }
 
-  melds() : Tile[][] {
+  melds() : Meld[][] {
     return findMelds(this.concealed);
   }
 }
@@ -142,9 +142,9 @@ function findTenpaiAgariRmMelds(tiles : Tile[]) : Tile[] {
   if (tiles.length == 0) {
     return [];
   }
-  // if only 1 left, the agari is a part of a pair
+  // if only 1 left, the agari is a part of a pair, this is invalid
   if (tiles.length == 1) {
-    return tiles;
+    return [];
   }
   // if only 2 left, check if it's in Taatsu (waiting on a third tile)
   if (tiles.length == 2) {
@@ -169,8 +169,8 @@ function findTenpaiAgariRmMelds(tiles : Tile[]) : Tile[] {
 }
 
 // finds melds of a concealed hand (has a pair)
-function findMelds(tiles : Tile[]) : Tile[][] {
-  let hands : Tile[][] = [];
+function findMelds(tiles : Tile[]) : Meld[][] {
+  let candidateHands : Meld[][] = [];
   // get pair
   for (let p1 = 0; p1 < tiles.length; p1++) {
   for (let p2 = 0; p2 < tiles.length; p2++) {
@@ -181,30 +181,37 @@ function findMelds(tiles : Tile[]) : Tile[][] {
     let subset = [...tiles];
     subset.splice(p1,1);
     subset.splice(p2-1,1);
+    candidateHands.concat(findMeldsNoPair(subset,[]));
   }
   }
-  return hands;
+
+  return candidateHands;
 }
 
 // find melds within triplets (no pair)
-function findMeldsNoPair(tiles : Tile[], hands : Tile[][]) : Tile[] {
-  let meld = [];
+function findMeldsNoPair(tiles : Tile[], hand: Meld[]) : Meld[][] {
+  if (tiles.length == 0) {
+    return [hand];
+  }
+  if (tiles.length < 3) {
+    return [];
+  }
+  let candidateHands : Meld[][] = [];
   for (let m1 = 0; m1 < tiles.length-2; m1++) {
   for (let m2 = m1+1; m2 < tiles.length-1; m2++) {
   for (let m3 = m2+1; m3 < tiles.length; m3++) {
     // if a valid meld, remove and recurse
-    if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3]) || Tile.isShuntsu(tiles[m1],tiles[m2],tiles[m3])) {
+    // if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3]) || Tile.isShuntsu(tiles[m1],tiles[m2],tiles[m3])) {
+    if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3])) {
+      // remove from available tiles to check
       let subset = [...tiles];
       subset.splice(m1,1);
       subset.splice(m2-1,1);
       subset.splice(m3-2,1);
-      let hand = findMeldsNoPair(subset, hands);
-      if (hand.length > 0) {
-        hands.push(hand);
-      }
+      candidateHands = candidateHands.concat(findMeldsNoPair(tiles, hand));
     }
   }
   }
   }
-  return [];
+  return candidateHands;
 }

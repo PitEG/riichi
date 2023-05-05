@@ -32,7 +32,7 @@ export class Tile {
       return false;
     }
     // order and check if `a + 1 = b and a + 2 = c`;
-    let sorted = [a,b,c].sort(getSortFunc());
+    let sorted = [a,b,c].sort(Tile.getSortFunc());
     return (sorted[0].value + 1 == sorted[1].value && a.value + 2 == sorted[2].value);
   }
 
@@ -191,14 +191,14 @@ export class Tile {
   nameJPRM() : string {
     return "";
   }
-}
 
-function getSortFunc() {
-  return function(a : Tile, b: Tile) {
-    if (a.suit > b.suit) {
-      return a.suit - b.suit;
+  static getSortFunc() {
+    return function(a : Tile, b: Tile) {
+      if (a.suit > b.suit) {
+        return a.suit - b.suit;
+      }
+      return a.value - b.value;
     }
-    return a.value - b.value;
   }
 }
 

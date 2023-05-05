@@ -3,14 +3,25 @@ import Tile from './tile';
 export default class Meld {
   tile: Tile;
   type: Naki;
-  direction: number; // the player that this was taken from
+  source: number; // the player that this was taken from
 
-  constructor(tile : Tile, type : Naki, direction : number) {
+  constructor(tile : Tile, type : Naki, source: number) {
     this.tile = tile;
     this.type = type;
-    this.direction = direction;
+    this.source = source;
   }
 
+  static makeShuntsu(a : Tile, b : Tile, c : Tile) : Meld | null {
+    if (!Tile.isShuntsu(a,b,c)) {
+      return null;
+    }
+    let sorted = [a,b,c].sort(Tile.getSortFunc());
+    return new Meld(sorted[0], Naki.Chii,-1);
+  }
+
+  static makeKoutsu(tile: Tile) : Meld {
+    return new Meld(tile, Naki.Pon, -1);
+  }
 }
 
 export enum Naki {
