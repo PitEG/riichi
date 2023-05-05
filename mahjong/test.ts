@@ -33,5 +33,7 @@ p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new T
 console.log('finding tenpai');
 console.log(p.checkTenpai());
 
-p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new Tile(1,3), new Tile(1,3), new Tile(1,4), new Tile(1,5)];
+// p.concealed = [new Tile(1,1), new Tile(1,2), new Tile(1,2), new Tile(1,2), new Tile(1,3), new Tile(1,3), new Tile(1,4), new Tile(1,5)];
+console.log("finding melds");
+p.concealed = [new Tile(2,9), new Tile(2,9), new Tile(1,1), new Tile(1,2), new Tile(1,3)]; //, new Tile(1,2), new Tile(1,3), new Tile(1,3), new Tile(1,4), new Tile(1,5)];
 console.log(p.melds());

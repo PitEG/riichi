@@ -192,6 +192,10 @@ export class Tile {
     return "";
   }
 
+  static sort(tiles : Tile[]) : Tile[] {
+    return tiles.sort(Tile.getSortFunc());
+  }
+
   static getSortFunc() {
     return function(a : Tile, b: Tile) {
       if (a.suit > b.suit) {

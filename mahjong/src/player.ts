@@ -173,15 +173,16 @@ function findMelds(tiles : Tile[]) : Meld[][] {
   let candidateHands : Meld[][] = [];
   // get pair
   for (let p1 = 0; p1 < tiles.length; p1++) {
-  for (let p2 = 0; p2 < tiles.length; p2++) {
-    // if not equal, let's go again
+  for (let p2 = p1+1; p2 < tiles.length; p2++) {
+    // if not equal, move on to next potential pair
     if (!tiles[p1].equals(tiles[p2])) {
+      continue;
     }
     // if equal, start finding melds
     let subset = [...tiles];
     subset.splice(p1,1);
     subset.splice(p2-1,1);
-    candidateHands.concat(findMeldsNoPair(subset,[]));
+    candidateHands = candidateHands.concat(findMeldsNoPair(subset,[]));
   }
   }
 
@@ -190,6 +191,7 @@ function findMelds(tiles : Tile[]) : Meld[][] {
 
 // find melds within triplets (no pair)
 function findMeldsNoPair(tiles : Tile[], hand: Meld[]) : Meld[][] {
+  console.log('tiles:', tiles, '\nmelds:', hand)
   if (tiles.length == 0) {
     return [hand];
   }
@@ -201,14 +203,20 @@ function findMeldsNoPair(tiles : Tile[], hand: Meld[]) : Meld[][] {
   for (let m2 = m1+1; m2 < tiles.length-1; m2++) {
   for (let m3 = m2+1; m3 < tiles.length; m3++) {
     // if a valid meld, remove and recurse
-    // if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3]) || Tile.isShuntsu(tiles[m1],tiles[m2],tiles[m3])) {
-    if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3])) {
+    if (Tile.isKoutsu(tiles[m1],tiles[m2],tiles[m3]) || Tile.isShuntsu(tiles[m1],tiles[m2],tiles[m3])) {
       // remove from available tiles to check
       let subset = [...tiles];
       subset.splice(m1,1);
       subset.splice(m2-1,1);
       subset.splice(m3-2,1);
-      candidateHands = candidateHands.concat(findMeldsNoPair(tiles, hand));
+      if (Tile.isKoutsu(tiles[m1], tiles[m2], tiles[m3])) {
+        hand.push(new Meld(tiles[m1],Naki.Pon,-1));
+      }
+      else if (Tile.isShuntsu(tiles[m1], tiles[m2], tiles[m3])) {
+        let firstTile = Tile.sort([tiles[m1], tiles[m2], tiles[m3]])[0];
+        hand.push(new Meld(firstTile, Naki.Chii,-1)); // placeholder
+      }
+      candidateHands = candidateHands.concat(findMeldsNoPair(subset, hand));
     }
   }
   }

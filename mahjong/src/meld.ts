@@ -11,6 +11,21 @@ export default class Meld {
     this.source = source;
   }
 
+  // returns a list of tiles that this meld is made of 
+  expand() : Tile[] {
+    switch(this.type) {
+      case(Naki.Pon): return [this.tile.clone(), this.tile.clone(), this.tile.clone()];
+      case(Naki.Chii): {
+        let first = this.tile.clone();
+        let second = new Tile(first.suit, first.value+1);
+        let third = new Tile(first.suit, first.value+2);
+        return [first, second, third];
+      };
+      // TODO: missing a few more cases 
+    }
+    return [];
+  }
+
   static makeShuntsu(a : Tile, b : Tile, c : Tile) : Meld | null {
     if (!Tile.isShuntsu(a,b,c)) {
       return null;
