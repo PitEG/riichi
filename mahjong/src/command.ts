@@ -17,7 +17,7 @@ export default class Command {
 
   // BASIC BOARD PROTOCOL
 
-  // give a player a tile
+  // player draws and takes the new tile
   static playerDraw(player : number) : Command {
     return new Command(
       `p${player} draws`,
@@ -32,6 +32,7 @@ export default class Command {
     );
   }
 
+  // give a player a tile
   static givePlayerTile(player : number, tile : Tile) : Command {
     return new Command(
       `p${player} is given ${tile}`,
@@ -44,6 +45,7 @@ export default class Command {
     );
   }
 
+  // player removes a tile from their concealed hand
   static playerDiscard(player : number, tile : Tile) : Command {
     return new Command(
       `p${player} discards ${tile.nameEN()}`,
@@ -68,6 +70,7 @@ export default class Command {
     );
   }
 
+  // increase the revealed dora counter
   static revealDora() : Command {
     return new Command(
       `revealing new dora`,
@@ -80,6 +83,7 @@ export default class Command {
     );
   }
 
+  // player takes another player's recent discard for a meld
   static call(srcPlayer: number, dstPlayer : number, meld: Meld) : Command {
     return new Command(
       ``,
@@ -90,6 +94,7 @@ export default class Command {
     );
   }
 
+  // player takes another player's recent discard for a win
   static callRon(srcPlayer : number, dstPlayer : number) : Command {
     return new Command(
       ``,
@@ -100,6 +105,7 @@ export default class Command {
     );
   }
 
+  // player can call tsumo and win
   static callTsumo(player : number) : Command {
     return new Command(
       ``,
@@ -110,6 +116,7 @@ export default class Command {
     );
   }
 
+  // whole game is ended
   static endGame() : Command {
     return new Command(
       ``,
@@ -133,6 +140,7 @@ export default class Command {
     );
   }
 
+  // reset board to make a new round
   static newRound() : Command {
     return new Command(
       ``,

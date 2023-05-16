@@ -1,6 +1,5 @@
 import {Tile,Honor} from './tile';
 import Meld from './meld';
-import {Naki} from './meld';
 
 export default class Player {
   seat: Honor;
@@ -33,5 +32,10 @@ export default class Player {
       }
     }
     return false;
+  }
+
+  discard(tile: Tile) {
+    this.remove(tile);
+    this.discards.push(tile);
   }
 }

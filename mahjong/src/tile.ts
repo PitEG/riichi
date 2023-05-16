@@ -1,10 +1,14 @@
 export class Tile {
   suit: Suit; // Shoku
   value: number | Honor;
+  red: boolean;
+  visible: boolean;
 
   constructor(suit: Suit, value: number | Honor) {
     this.suit = suit;
     this.value = value;
+    this.red = false;
+    this.visible = false;
   }
   
   // special tile used for covered tiles, should probably be only used for display
@@ -22,7 +26,10 @@ export class Tile {
   }
 
   equals(tile: Tile) : boolean {
-    return (this.suit == tile.suit && this.value == tile.value);
+    return (this.suit == tile.suit && 
+            this.value == tile.value &&
+            this.visible == tile.visible &&
+            this.red == tile.red);
   }
 
   // sequence
