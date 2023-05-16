@@ -1,8 +1,8 @@
-import Board from './src/board';
-import Command from './src/command';
-import Player from './src/player';
-import {Tile, Suit, Honor} from './src/tile';
-import Util from './src/util';
+import Board from './board';
+import Command from './command';
+import Player from './player';
+import {Tile, Suit, Honor} from './tile';
+import Util from './util';
 
 let thing = 'hi'
 let board = new Board();
